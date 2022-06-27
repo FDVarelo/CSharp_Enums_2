@@ -25,7 +25,7 @@ namespace Enum_2.Entities
         }
         public double TotalValue()
         {
-            return ValuePerHour*Hours;
+            return ValuePerHour * Hours;
         }
     }
 }

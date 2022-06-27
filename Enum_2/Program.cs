@@ -25,16 +25,18 @@ namespace Enum_2
 
             Console.Write("How many contracts will be assigned to this worker? ");
             int x = int.Parse(Console.ReadLine());
+            DateTime valuetime = DateTime.Now;
             for (int i = 0; i < x; i++)
             {
                 Console.WriteLine("Enter #" + i + " contract data ↓");
                 Console.Write("Date (dd/mm/yyyy): ");
                 DateTime dateTime = DateTime.Parse(Console.ReadLine());
                 Console.Write("Value per hour: ");
-                double valuePHour = double.Parse(Console.ReadLine());
+                double valuePHour = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
                 Console.Write("Duration (hours): ");
                 int totalHours = int.Parse(Console.ReadLine());
 
+                valuetime = dateTime;
                 HourContract contracts = new HourContract(dateTime, valuePHour, totalHours);
                 worker.AddContract(contracts);
             }
@@ -42,7 +44,11 @@ namespace Enum_2
             string pickDate = Console.ReadLine();
             int month = int.Parse(pickDate.Substring(0, 2)); // pegas os dois primeiros valores da string
             int year = int.Parse(pickDate.Substring(3)); // pega a partir da terceira letra da string
-            Console.WriteLine("Name: " + worker.Name + "\nDepartment: " + worker.Department.Name + "\nIncome for " + pickDate + ": " + worker.Income(year,month).ToString("F2", CultureInfo.InvariantCulture));
+            Console.WriteLine($"month: {month}, year: {year}\ndatetime.month: {valuetime.Date.Month}, year: {valuetime.Date.Year}");
+            Console.WriteLine("Name: " + worker.Name 
+                + "\nDepartment: " + worker.Department.Name 
+                + "\nIncome for " + pickDate + ": " 
+                + worker.Income(year,month).ToString("F2", CultureInfo.InvariantCulture));
 
         }
     }

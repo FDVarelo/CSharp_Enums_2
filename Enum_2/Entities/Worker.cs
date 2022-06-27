@@ -14,7 +14,7 @@ namespace Enum_2.Entities
         public double BaseSalary { get; set; }
         public Department Department { get; set; }
         // Como podemos ter mais de um contract por woker, temos que usar List
-        public List<HourContract> Contracts { get; set; } = new List<HourContract>();
+        public List<HourContract> Contracts { get; private set; } = new List<HourContract>();
         
 
         public Worker()
@@ -44,7 +44,12 @@ namespace Enum_2.Entities
             {
                 if(contract.Date.Year == year && contract.Date.Month == month)
                 {
+                    //Console.WriteLine("Entrou!");
                     sum += contract.TotalValue();
+                }
+                else
+                {
+                    //Console.WriteLine("Não Entrou!");
                 }
             }
             return sum;
